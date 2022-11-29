@@ -69,41 +69,12 @@ function getRectangleString(width, height, top = [], walls = [], down = []) {
   return `${top.join('')}${down.join('')}`;
 }
 
-/**
- * Encode specified string with ROT13 cipher
- * See details:  https://en.wikipedia.org/wiki/ROT13
- *
- * @param {string} str
- * @return {string}
- *
- * @example
- *
- *   'hello' => 'uryyb'
- *   'Why did the chicken cross the road?' => 'Jul qvq gur puvpxra pebff gur ebnq?'
- *   'Gb trg gb gur bgure fvqr!' => 'To get to the other side!'
- *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
- *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
- *
- */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  return str.replace(/[A-Z]/gi, (item) => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'['ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.indexOf(item)]);
 }
 
-/**
- * Returns true if the value is string; otherwise false.
- * @param {string} value
- * @return {boolean}
- *
- * @example
- *   isString() => false
- *   isString(null) => false
- *   isString([]) => false
- *   isString({}) => false
- *   isString('test') => true
- *   isString(new String('test')) => true
- */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  return typeof value === 'string' || value instanceof String;
 }
 
 /**
@@ -130,8 +101,11 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cards = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+  const suits = ['♣', '♦', '♥', '♠'];
+  if (value.includes('10')) return cards.indexOf('10') + suits.indexOf(value[2]) * 13;
+  return cards.indexOf(value[0]) + suits.indexOf(value[1]) * 13;
 }
 
 module.exports = {
