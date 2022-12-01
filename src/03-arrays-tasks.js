@@ -1,13 +1,3 @@
-/* ********************************************************************************************
- *                                                                                            *
- * Please read the following tutorial before implementing tasks:                               *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array     *
- *                                                                                            *
- * NOTE : Please do not use loops! All tasks can be implemented using standard Array methods  *
- *                                                                                            *
- ******************************************************************************************** */
-
-
 function findElement(arr, value) {
   return arr.indexOf(value);
 }
@@ -68,54 +58,19 @@ function toArrayOfSquares(arr) {
   return arr.map((item) => item ** 2);
 }
 
-/**
- * Transforms the numeric array to the according moving sum array:
- *     f[n] = x[0] + x[1] + x[2] +...+ x[n]
- *  or f[n] = f[n-1] + x[n]
- *
- * @param {array} arr
- * @return {array}
- *
- * Example :
- *   [ 1, 1, 1, 1, 1 ]        => [ 1, 2, 3, 4, 5 ]
- *   [ 10, -10, 10, -10, 10 ] => [ 10, 0, 10, 0, 10 ]
- *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
- *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
- */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  const result = [];
+  arr.reduce((prev, cur) => {
+    result.push(cur + prev);
+    return (prev + cur);
+  }, 0);
+  return result;
 }
 
-/**
- * Returns every second item from the specified array:
- *
- * @param {array} arr
- * @return {array}
- *
- * Example :
- * [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 2, 4, 6, 8, 10 ]
- * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
- * [ "a" ] => []
- */
-function getSecondItems(/* arr */) {
-  throw new Error('Not implemented');
+function getSecondItems(arr) {
+  return arr.filter((item, index) => index % 2 !== 0);
 }
 
-
-/**
- * Propagates every item in sequence its position times
- * Returns an array that consists of: one first item, two second items, three third items etc.
- *
- * @param {array} arr
- * @return {array}
- *
- * @example :
- *  [] => []
- *  [ 1 ] => [ 1 ]
- *  [ 'a', 'b' ] => [ 'a', 'b','b' ]
- *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
- *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
- */
 function propagateItemsByPositionIndex(arr) {
   return arr.map((item, index) => Array(index + 1).fill(item)).flat();
 }
@@ -216,38 +171,11 @@ function distinct(arr) {
  */
 function group(/* array, keySelector, valueSelector */) {
   throw new Error('Not implemented');
-  // const collection = new Map();
-  // array.map((item) => collection.set(keySelector(item), [valueSelector(item)]));
-  // return Object.fromEntries(collection);
 }
 
-// console.log(group([
-//   { country: 'Belarus', city: 'Brest' },
-//   { country: 'Russia', city: 'Omsk' },
-//   { country: 'Russia', city: 'Samara' },
-//   { country: 'Belarus', city: 'Grodno' },
-//   { country: 'Belarus', city: 'Minsk' },
-//   { country: 'Poland', city: 'Lodz' }
-// ], item => item.country, item => item.city));
-
-
-/**
- * Projects each element of the specified array to a sequence
- * and flattens the resulting sequences into one array.
- *
- * @param {array} arr
- * @param {Function} childrenSelector, a transform function to apply to each element
- *                                     that returns an array of children
- * @return {array}
- *
- * @example
- *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
- *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
- */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.map((item) => childrenSelector(item)).flat();
 }
-
 
 /**
  * Returns an element from the multidimensional array by the specified indexes.
@@ -265,27 +193,17 @@ function getElementByIndexes(/* arr, indexes */) {
   throw new Error('Not implemented');
 }
 
-
-/**
- * Swaps the head and tail of the specified array:
- * the head (first half) of array move to the end, the tail (last half) move to the start.
- * The middle element (if exists) leave on the same position.
- *
- *
- * @param {array} arr
- * @return {array}
- *
- * @example
- *   [ 1, 2, 3, 4, 5 ]   =>  [ 4, 5, 3, 1, 2 ]
- *    \----/   \----/
- *     head     tail
- *
- *   [ 1, 2 ]  => [ 2, 1 ]
- *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
- *
- */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  if (arr.length % 2 === 0) {
+    const head = arr.splice(0, arr.length / 2);
+    return arr.concat(head);
+  }
+  if (arr.length % 2 !== 0) {
+    const head = arr.splice(0, arr.length / 2);
+    const middle = [arr.shift()];
+    return arr.concat(middle, head);
+  }
+  return null;
 }
 
 
