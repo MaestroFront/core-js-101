@@ -1,50 +1,12 @@
-/* *************************************************************************************************
- *                                                                                                *
- * Please read the following tutorial before implementing tasks:                                   *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling  *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration              *
- *                                                                                                *
- ************************************************************************************************ */
-
-
-/**
- * Returns the 'Fizz','Buzz' or an original number using the following rules:
- * 1) return original number
- * 2) but if number multiples of three return 'Fizz'
- * 3) for the multiples of five return 'Buzz'
- * 4) for numbers which are multiples of both three and five return 'FizzBuzz'
- *
- * @param {number} num
- * @return {any}
- *
- * @example
- *   2 =>  2
- *   3 => 'Fizz'
- *   5 => 'Buzz'
- *   4 => 4
- *  15 => 'FizzBuzz'
- *  20 => 'Buzz'
- *  21 => 'Fizz'
- *
- */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 3 === 0 && num % 5 !== 0) return 'Fizz';
+  if (num % 3 !== 0 && num % 5 === 0) return 'Buzz';
+  if (num % 3 === 0 && num % 5 === 0) return 'FizzBuzz';
+  return num;
 }
 
-
-/**
- * Returns the factorial of the specified integer n.
- *
- * @param {number} n
- * @return {number}
- *
- * @example:
- *   1  => 1
- *   5  => 120
- *   10 => 3628800
- */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  return (n !== 1) ? n * getFactorial(n - 1) : 1;
 }
 
 
@@ -64,24 +26,8 @@ function getSumBetweenNumbers(/* n1, n2 */) {
   throw new Error('Not implemented');
 }
 
-
-/**
- * Returns true, if a triangle can be built with the specified sides a, b, c
- * and false in any other ways.
- *
- * @param {number} a
- * @param {number} b
- * @param {number} c
- * @return {bool}
- *
- * @example:
- *   1,2,3    =>  false
- *   3,4,5    =>  true
- *   10,1,1   =>  false
- *   10,10,10 =>  true
- */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  return (a + b > c && a + c > b && b + c > a);
 }
 
 
