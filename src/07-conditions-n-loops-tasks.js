@@ -9,64 +9,22 @@ function getFactorial(n) {
   return (n !== 1) ? n * getFactorial(n - 1) : 1;
 }
 
-
-/**
- * Returns the sum of integer numbers between n1 and n2 (inclusive).
- *
- * @param {number} n1
- * @param {number} n2
- * @return {number}
- *
- * @example:
- *   1,2   =>  3  ( = 1+2 )
- *   5,10  =>  45 ( = 5+6+7+8+9+10 )
- *   -1,1  =>  0  ( = -1 + 0 + 1 )
- */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  let total = n1 - 1;
+  return Array(n2 - n1 + 1).fill(1).map((item) => {
+    const a = item + total;
+    total += 1;
+    return a;
+  }).reduce((acc, cur) => acc + cur);
 }
 
 function isTriangle(a, b, c) {
   return (a + b > c && a + c > b && b + c > a);
 }
 
-
-/**
- * Returns true, if two specified axis-aligned rectangles overlap, otherwise false.
- * Each rectangle representing by object
- *  {
- *     top: 5,
- *     left: 5,
- *     width: 20,
- *     height: 10
- *  }
- *
- *  (5;5)
- *     -------------
- *     |           |
- *     |           |  height = 10
- *     -------------
- *        width=20
- *
- * NOTE: Please use canvas coordinate space (https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes#The_grid),
- * it differs from Cartesian coordinate system.
- *
- * @param {object} rect1
- * @param {object} rect2
- * @return {bool}
- *
- * @example:
- *   { top: 0, left: 0, width: 10, height: 10 },
- *   { top: 5, left: 5, width: 20, height: 20 }    =>  true
- *
- *   { top: 0, left: 0, width: 10, height: 10 },
- *   { top:20, left:20, width: 20, height: 20 }    =>  false
- *
- */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  return (rect1.top + rect1.height > rect2.top && rect1.left + rect1.width > rect2.left);
 }
-
 
 /**
  * Returns true, if point lies inside the circle, otherwise false.
@@ -98,47 +56,28 @@ function isInsideCircle(/* circle, point */) {
   throw new Error('Not implemented');
 }
 
-
-/**
- * Returns the first non repeated char in the specified strings otherwise returns null.
- *
- * @param {string} str
- * @return {string}
- *
- * @example:
- *   'The quick brown fox jumps over the lazy dog' => 'T'
- *   'abracadabra'  => 'c'
- *   'entente' => null
- */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const unique = str.split('').filter((number, index, numbers) => numbers.indexOf(number) !== index);
+  const result = str.split('').filter((item) => !unique.includes(item));
+  if (result.length > 0) return result[0];
+  return null;
 }
 
-
-/**
- * Returns the string representation of math interval,
- * specified by two points and include / exclude flags.
- * See the details: https://en.wikipedia.org/wiki/Interval_(mathematics)
- *
- * Please take attention, that the smaller number should be the first in the notation
- *
- * @param {number} a
- * @param {number} b
- * @param {bool} isStartIncluded
- * @param {bool} isEndIncluded
- * @return {string}
- *
- * @example
- *   0, 1, true, true   => '[0, 1]'
- *   0, 1, true, false  => '[0, 1)'
- *   0, 1, false, true  => '(0, 1]'
- *   0, 1, false, false => '(0, 1)'
- * Smaller number has to be first :
- *   5, 3, true, true   => '[3, 5]'
- *
- */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  let left = '';
+  let right = '';
+  if (isStartIncluded) {
+    left += '[';
+  } else {
+    left += '(';
+  }
+  if (isEndIncluded) {
+    right += ']';
+  } else {
+    right += ')';
+  }
+  if (a < b) return `${left}${a}, ${b}${right}`;
+  return `${left}${b}, ${a}${right}`;
 }
 
 
@@ -158,21 +97,8 @@ function reverseString(/* str */) {
   throw new Error('Not implemented');
 }
 
-
-/**
- * Reverse the specified integer number (put all digits in reverse order)
- *
- * @param {number} num
- * @return {number}
- *
- * @example:
- *   12345 => 54321
- *   1111  => 1111
- *   87354 => 45378
- *   34143 => 34143
- */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return +(String(num).split('').reverse().join(''));
 }
 
 
