@@ -126,22 +126,10 @@ function isCreditCardNumber(/* ccn */) {
   throw new Error('Not implemented');
 }
 
-/**
- * Returns the digital root of integer:
- *   step1 : find sum of all digits
- *   step2 : if sum > 9 then goto step1 otherwise return the sum
- *
- * @param {number} n
- * @return {number}
- *
- * @example:
- *   12345 ( 1+2+3+4+5 = 15, 1+5 = 6) => 6
- *   23456 ( 2+3+4+5+6 = 20, 2+0 = 2) => 2
- *   10000 ( 1+0+0+0+0 = 1 ) => 1
- *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
- */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const a = String(num).split('').reduce((acc, cur) => +acc + +cur);
+  if (a < 10) return a;
+  return getDigitalRoot(a);
 }
 
 
@@ -170,31 +158,9 @@ function isBracketsBalanced(/* str */) {
   throw new Error('Not implemented');
 }
 
-
-/**
- * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
- * representation of specified number.
- * See more about
- * https://en.wikipedia.org/wiki/Binary_number
- * https://en.wikipedia.org/wiki/Ternary_numeral_system
- * https://en.wikipedia.org/wiki/Radix
- *
- * @param {number} num
- * @param {number} n, radix of the result
- * @return {string}
- *
- * @example:
- *   1024, 2  => '10000000000'
- *   6561, 3  => '100000000'
- *    365, 2  => '101101101'
- *    365, 3  => '111112'
- *    365, 4  => '11231'
- *    365, 10 => '365'
- */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
-
 
 /**
  * Returns the common directory path for specified array of full filenames.
