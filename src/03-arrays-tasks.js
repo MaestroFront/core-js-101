@@ -139,38 +139,19 @@ function distinct(arr) {
   return [...result];
 }
 
-/**
- * Groups elements of the specified array by key.
- * Returns multimap of keys extracted from array elements via keySelector callback
- * and values extracted via valueSelector callback.
- * See: https://en.wikipedia.org/wiki/Multimap
- *
- * @param {array} array
- * @param {Function} keySelector
- * @param {Function} valueSelector
- * @return {Map}
- *
- * @example
- *   group([
- *      { country: 'Belarus', city: 'Brest' },
- *      { country: 'Russia', city: 'Omsk' },
- *      { country: 'Russia', city: 'Samara' },
- *      { country: 'Belarus', city: 'Grodno' },
- *      { country: 'Belarus', city: 'Minsk' },
- *      { country: 'Poland', city: 'Lodz' }
- *     ],
- *     item => item.country,
- *     item => item.city
- *   )
- *            =>
- *   Map {
- *    "Belarus" => ["Brest", "Grodno", "Minsk"],
- *    "Russia" => ["Omsk", "Samara"],
- *    "Poland" => ["Lodz"]
- *   }
- */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  return array.reduce((acc, curr) => {
+    const key = keySelector(curr);
+    const value = valueSelector(curr);
+
+    let arr = [];
+    if (acc.get(key)) {
+      arr = acc.get(key);
+    }
+    arr.push(value);
+    acc.set(key, arr);
+    return acc;
+  }, new Map());
 }
 
 function selectMany(arr, childrenSelector) {
