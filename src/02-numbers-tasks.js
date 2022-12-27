@@ -22,29 +22,13 @@ function getAverage(/* value1, value2 */) {
   throw new Error('Not implemented');
 }
 
-/**
- * Returns a distance between two points by cartesian coordinates.
- *
- * @param {number} x1
- * @param {number} y1
- * @param {number} x2
- * @param {number} y2
- *
- * @return {number}
- *
- * @example:
- *   (0,0) (0,1)    => 1
- *   (0,0) (1,0)    => 1
- *   (-5,0) (10,-10) => 18.027756377319946
- */
-function getDistanceBetweenPoints(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getDistanceBetweenPoints(x1, y1, x2, y2) {
+  return Math.sqrt((Math.abs(x1) + Math.abs(x2)) ** 2 + (Math.abs(y1) + Math.abs(y2)) ** 2);
 }
 
 function getLinearEquationRoot(a, b) {
   return -b / a;
 }
-
 
 /**
  * Returns an angle (in radians) between two vectors given by xi and yi,
@@ -69,7 +53,7 @@ function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
 }
 
 function getLastDigit(value) {
-  return +(String(value)[String(value).length - 1]);
+  return +String(value)[String(value).length - 1];
 }
 
 function parseNumberFromString(value) {
