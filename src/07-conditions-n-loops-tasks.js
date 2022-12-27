@@ -6,24 +6,30 @@ function getFizzBuzz(num) {
 }
 
 function getFactorial(n) {
-  return (n !== 1) ? n * getFactorial(n - 1) : 1;
+  return n !== 1 ? n * getFactorial(n - 1) : 1;
 }
 
 function getSumBetweenNumbers(n1, n2) {
   let total = n1 - 1;
-  return Array(n2 - n1 + 1).fill(1).map((item) => {
-    const a = item + total;
-    total += 1;
-    return a;
-  }).reduce((acc, cur) => acc + cur);
+  return Array(n2 - n1 + 1)
+    .fill(1)
+    .map((item) => {
+      const a = item + total;
+      total += 1;
+      return a;
+    })
+    .reduce((acc, cur) => acc + cur);
 }
 
 function isTriangle(a, b, c) {
-  return (a + b > c && a + c > b && b + c > a);
+  return a + b > c && a + c > b && b + c > a;
 }
 
 function doRectanglesOverlap(rect1, rect2) {
-  return (rect1.top + rect1.height > rect2.top && rect1.left + rect1.width > rect2.left);
+  return (
+    rect1.top + rect1.height > rect2.top
+    && rect1.left + rect1.width > rect2.left
+  );
 }
 
 /**
@@ -57,7 +63,9 @@ function isInsideCircle(/* circle, point */) {
 }
 
 function findFirstSingleChar(str) {
-  const unique = str.split('').filter((number, index, numbers) => numbers.indexOf(number) !== index);
+  const unique = str
+    .split('')
+    .filter((number, index, numbers) => numbers.indexOf(number) !== index);
   const result = str.split('').filter((item) => !unique.includes(item));
   if (result.length > 0) return result[0];
   return null;
@@ -80,27 +88,13 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   return `${left}${b}, ${a}${right}`;
 }
 
-
-/**
- * Reverse the specified string (put all chars in reverse order)
- *
- * @param {string} str
- * @return {string}
- *
- * @example:
- * 'The quick brown fox jumps over the lazy dog' => 'god yzal eht revo spmuj xof nworb kciuq ehT'
- * 'abracadabra' => 'arbadacarba'
- * 'rotator' => 'rotator'
- * 'noon' => 'noon'
- */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 function reverseInteger(num) {
-  return +(String(num).split('').reverse().join(''));
+  return +String(num).split('').reverse().join('');
 }
-
 
 /**
  * Validates the CCN (credit card number) and return true if CCN is valid
@@ -122,16 +116,44 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const number = String(ccn)
+    .split('')
+    .map((item) => +item)
+    .pop();
+
+  const array = String(ccn)
+    .split('')
+    .reverse()
+    .map((item, index) => {
+      if (index % 2 === 0) {
+        return item * 1;
+      }
+      return item * 2;
+    })
+    .reverse()
+    .map((item) => {
+      if (String(item).length === 2) {
+        return String(item)
+          .split('')
+          .reduce((acc, curr) => acc + +curr, 0);
+      }
+      return item;
+    });
+  array.pop();
+
+  const sum = array.reduce((acc, curr) => acc + curr, 0);
+
+  return (10 - (sum % 10)) % 10 === number;
 }
 
 function getDigitalRoot(num) {
-  const a = String(num).split('').reduce((acc, cur) => +acc + +cur);
+  const a = String(num)
+    .split('')
+    .reduce((acc, cur) => +acc + +cur);
   if (a < 10) return a;
   return getDigitalRoot(a);
 }
-
 
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
@@ -178,7 +200,6 @@ function getCommonDirectoryPath(/* pathes */) {
   throw new Error('Not implemented');
 }
 
-
 /**
  * Returns the product of two specified matrixes.
  * See details: https://en.wikipedia.org/wiki/Matrix_multiplication
@@ -200,7 +221,6 @@ function getCommonDirectoryPath(/* pathes */) {
 function getMatrixProduct(/* m1, m2 */) {
   throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the evaluation of the specified tic-tac-toe position.
@@ -235,7 +255,6 @@ function getMatrixProduct(/* m1, m2 */) {
 function evaluateTicTacToePosition(/* position */) {
   throw new Error('Not implemented');
 }
-
 
 module.exports = {
   getFizzBuzz,
