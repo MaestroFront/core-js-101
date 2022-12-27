@@ -158,20 +158,13 @@ function selectMany(arr, childrenSelector) {
   return arr.map((item) => childrenSelector(item)).flat();
 }
 
-/**
- * Returns an element from the multidimensional array by the specified indexes.
- *
- * @param {array} arr
- * @param {array} indexes
- * @return {any} element from array
- *
- * @example
- *   [[1, 2], [3, 4], [5, 6]], [0,0]  => 1        (arr[0][0])
- *   ['one','two','three'], [2]       => 'three'  (arr[2])
- *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
- */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  if (indexes.length === 1) return arr[indexes[0]];
+  const result = arr[indexes.shift()];
+  if (typeof result !== 'number') {
+    return getElementByIndexes(result, indexes);
+  }
+  return result;
 }
 
 function swapHeadAndTail(arr) {
