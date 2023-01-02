@@ -96,26 +96,6 @@ function reverseInteger(num) {
   return +String(num).split('').reverse().join('');
 }
 
-/**
- * Validates the CCN (credit card number) and return true if CCN is valid
- * and false otherwise.
- *
- * See algorithm here : https://en.wikipedia.org/wiki/Luhn_algorithm
- *
- * @param {number} cnn
- * @return {boolean}
- *
- * @example:
- *   79927398713      => true
- *   4012888888881881 => true
- *   5123456789012346 => true
- *   378282246310005  => true
- *   371449635398431  => true
- *
- *   4571234567890111 => false
- *   5436468789016589 => false
- *   4916123456789012 => false
- */
 function isCreditCardNumber(ccn) {
   const number = String(ccn)
     .split('')
@@ -252,8 +232,56 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  if ((position[0][0] === '0') && (position[0][1] === '0') && (position[0][2] === '0')) {
+    return '0';
+  }
+  if ((position[0][0] === '0') && (position[1][0] === '0') && (position[2][0] === '0')) {
+    return '0';
+  }
+  if ((position[0][0] === '0') && (position[1][1] === '0') && (position[2][2] === '0')) {
+    return '0';
+  }
+  if ((position[1][0] === '0') && (position[1][1] === '0') && (position[1][2] === '0')) {
+    return '0';
+  }
+  if ((position[2][0] === '0') && (position[2][1] === '0') && (position[2][2] === '0')) {
+    return '0';
+  }
+  if ((position[0][1] === '0') && (position[1][1] === '0') && (position[2][1] === '0')) {
+    return '0';
+  }
+  if ((position[0][2] === '0') && (position[1][2] === '0') && (position[2][2] === '0')) {
+    return '0';
+  }
+  if ((position[0][2] === '0') && (position[1][1] === '0') && (position[2][0] === '0')) {
+    return '0';
+  }
+  if ((position[0][0] === 'X') && (position[0][1] === 'X') && (position[0][2] === 'X')) {
+    return 'X';
+  }
+  if ((position[0][0] === 'X') && (position[1][0] === 'X') && (position[2][0] === 'X')) {
+    return 'X';
+  }
+  if ((position[0][0] === 'X') && (position[1][1] === 'X') && (position[2][2] === 'X')) {
+    return 'X';
+  }
+  if ((position[1][0] === 'X') && (position[1][1] === 'X') && (position[1][2] === 'X')) {
+    return 'X';
+  }
+  if ((position[2][0] === 'X') && (position[2][1] === 'X') && (position[2][2] === 'X')) {
+    return 'X';
+  }
+  if ((position[0][1] === 'X') && (position[1][1] === 'X') && (position[2][1] === 'X')) {
+    return 'X';
+  }
+  if ((position[0][2] === 'X') && (position[1][2] === 'X') && (position[2][2] === 'X')) {
+    return 'X';
+  }
+  if ((position[0][2] === 'X') && (position[1][1] === 'X') && (position[2][0] === 'X')) {
+    return 'X';
+  }
+  return undefined;
 }
 
 module.exports = {
